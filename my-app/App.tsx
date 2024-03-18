@@ -6,11 +6,13 @@ import Form from './src/lab1/Form';
 import Lab2 from './src/lab2/Lab2';
 import { createContext } from 'react';
 import { HeaderData } from './src/lab2/Header';
+import Lab3 from './src/lab3/Lab3';
 
 export type RootParams = {
   Lab1Home: undefined,
   Lab1Bai3: undefined,
-  Lab2: undefined
+  Lab2: undefined,
+  Lab3: undefined,
 }
 
 const Stack = createNativeStackNavigator<RootParams>()
@@ -22,6 +24,7 @@ export default function App() {
         <Stack.Screen name='Lab1Home' component={Lab1} />
         <Stack.Screen name='Lab1Bai3' component={Form} />
         <Stack.Screen name='Lab2' component={Lab2} />
+        <Stack.Screen name='Lab3' component={Lab3} />
       </Stack.Navigator>
     </NavigationContainer>
   );

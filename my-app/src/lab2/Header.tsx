@@ -14,7 +14,6 @@ export interface HeaderData {
 
 const Header = () => {
     const headerData = useContext(HeaderContext)
-    console.log('header re-render', headerData);
 
     return (
         <View className='w-full bg-slate-50 flex-row items-center p-2'>

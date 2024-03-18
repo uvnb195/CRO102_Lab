@@ -3,11 +3,17 @@ import React, { createContext, useState } from 'react'
 import Header, { HeaderContext, HeaderData } from './Header'
 import Wrapper from './Wrapper'
 import InputField from '../lab1/InputField'
+import { SimpleLineIcons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { RootParams } from '../../App'
 
 
 
 
 const Lab2 = () => {
+    const navigator = useNavigation<NativeStackNavigationProp<RootParams>>()
+
     const [input, setInput] = useState<HeaderData>({ name: '', avatar: '' })
 
     const [isError, setIsError] = useState<{ name: boolean, avatar: boolean }>({ name: false, avatar: false })
@@ -62,7 +68,6 @@ const Lab2 = () => {
 
     return (
         <HeaderContext.Provider value={headerData}>
-
             <Wrapper containerStyle='w-full justify-start flex-grow items-center'>
                 <InputField
                     style='w-full'
@@ -81,6 +86,12 @@ const Lab2 = () => {
                     onPress={validation}
                     className='m-2  bg-blue-400 py-2 px-4 rounded-lg'>
                     <Text className='text-white text-lg font-semibold text-center'>CẬP NHẬT THÔNG TIN</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => { navigator.navigate('Lab3') }}
+                    className='m-2  bg-blue-400 py-2 px-4 rounded-lg flex-row items-center'>
+                    <Text className='text-white text-lg font-semibold text-center pr-2'>Next</Text>
+                    <SimpleLineIcons name='arrow-right' size={20} color={'white'} />
                 </TouchableOpacity>
             </Wrapper>
         </HeaderContext.Provider>
