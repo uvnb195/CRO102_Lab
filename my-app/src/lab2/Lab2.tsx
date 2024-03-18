@@ -1,19 +1,46 @@
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import Header from './Header'
+import { View, Text, SafeAreaView, TouchableOpacity, ImageSourcePropType } from 'react-native'
+import React, { createContext, useState } from 'react'
+import Header, { HeaderContext, HeaderData } from './Header'
 import Wrapper from './Wrapper'
 import InputField from '../lab1/InputField'
 
+
+
+
 const Lab2 = () => {
-    console.log('lab 2 re-render');
-    const [input, setInput] = useState<{ name: string, avatar: string }>({ name: '', avatar: '' })
+    const [input, setInput] = useState<HeaderData>({ name: '', avatar: '' })
+
     const [isError, setIsError] = useState<{ name: boolean, avatar: boolean }>({ name: false, avatar: false })
+
+    const [headerData, setHeaderData] = useState<HeaderData>({
+        name: null,
+        avatar: null
+    })
+
+
     const validation = () => {
-        if (!input.name || !input.avatar)
+        const hasError = () => {
+            const errors = Object.values(isError)
+            const error = errors.find(item => item == true)
+            console.log(error);
+            return (error == undefined ? false : true)
+        }
+        if (hasError() == false) {
+            setHeaderData({ ...input })
+            setIsError({ name: false, avatar: false })
+            setInput({ name: '', avatar: '' })
+        }
+
+
+        if (!input.name || !input.avatar) {
             setIsError({
-                name: input.name.length == 0,
-                avatar: input.avatar.length == 0
+                name: input.name == undefined || input.name?.length == 0,
+                avatar: input.avatar == undefined || input.avatar?.length == 0
             })
+            return
+        }
+
+        // if (notError)
     }
 
     const handleName = (name: string) => {
@@ -34,26 +61,29 @@ const Lab2 = () => {
     }
 
     return (
-        <Wrapper containerStyle='w-full justify-start flex-grow items-center'>
-            <InputField
-                style='w-full'
-                title={'Tên'}
-                isError={isError.name}
-                value={input.name}
-                onValueChange={handleName} />
+        <HeaderContext.Provider value={headerData}>
 
-            <InputField
-                style='w-full'
-                title={'Địa chỉ avatar'}
-                isError={isError.avatar}
-                value={input.avatar}
-                onValueChange={handleAvatar} />
-            <TouchableOpacity
-                onPress={validation}
-                className='m-2  bg-blue-400 py-2 px-4 rounded-lg'>
-                <Text className='text-white text-lg font-semibold text-center'>CẬP NHẬT THÔNG TIN</Text>
-            </TouchableOpacity>
-        </Wrapper>
+            <Wrapper containerStyle='w-full justify-start flex-grow items-center'>
+                <InputField
+                    style='w-full'
+                    title={'Tên'}
+                    isError={isError.name}
+                    value={input.name || ''}
+                    onValueChange={handleName} />
+
+                <InputField
+                    style='w-full'
+                    title={'Địa chỉ avatar'}
+                    isError={isError.avatar}
+                    value={input.avatar || ''}
+                    onValueChange={handleAvatar} />
+                <TouchableOpacity
+                    onPress={validation}
+                    className='m-2  bg-blue-400 py-2 px-4 rounded-lg'>
+                    <Text className='text-white text-lg font-semibold text-center'>CẬP NHẬT THÔNG TIN</Text>
+                </TouchableOpacity>
+            </Wrapper>
+        </HeaderContext.Provider>
     )
 }
 

@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View, Text, SafeAreaView, ImageSourcePropType } from 'react-native'
 import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
+
 
 type Props = {
     containerStyle?: string,

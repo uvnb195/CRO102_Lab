@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Lab1 from './src/lab1/Lab1';
 import Form from './src/lab1/Form';
 import Lab2 from './src/lab2/Lab2';
+import { createContext } from 'react';
+import { HeaderData } from './src/lab2/Header';
 
 export type RootParams = {
   Lab1Home: undefined,
