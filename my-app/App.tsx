@@ -13,6 +13,7 @@ import Content from './src/lab5-6/Content';
 import { Provider } from 'react-redux';
 import { store } from './src/redux/store';
 import DummyJson from './src/lab5-6/DummyJson';
+import Lab6Form from './src/lab5-6/Lab6Form';
 
 export type RootParams = {
   Lab1Home: undefined,
@@ -22,7 +23,8 @@ export type RootParams = {
   Lab3Flatlist: undefined,
   Lab4Picker: undefined,
   Lab56: undefined,
-  Lab56Api: undefined
+  Lab56Api: undefined,
+  Lab6Form: undefined
 }
 
 const Stack = createNativeStackNavigator<RootParams>()
@@ -31,7 +33,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Lab56' screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName='Lab6Form' screenOptions={{ headerShown: false }}>
           <Stack.Screen name='Lab1Home' component={Lab1} />
           <Stack.Screen name='Lab1Bai3' component={Form} />
           <Stack.Screen name='Lab2' component={Lab2} />
@@ -40,7 +42,9 @@ export default function App() {
             name='Lab3Flatlist'
             component={FlatlistAnim} />
           {/* <Stack.Screen name='Lab4Picker' component={Lab4Picker} /> */}
-          <Stack.Screen name='Lab56' component={Content} /><Stack.Screen name='Lab56Api' component={DummyJson} />
+          <Stack.Screen name='Lab56' component={Content} />
+          <Stack.Screen name='Lab56Api' component={DummyJson} />
+          <Stack.Screen name='Lab6Form' component={Lab6Form} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
